@@ -4,6 +4,7 @@ import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Chip from '@mui/material/Chip';
 import HomeIcon from '@mui/icons-material/Home';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Avatar from '@mui/material/Avatar'
 
 const StyledBreadcrumb = styled(Chip)(({ theme }) => {
   const backgroundColor =
@@ -33,6 +34,11 @@ function handleClick(event) {
 export default function CustomizedBreadcrumbs() {
   return (
     <div role="presentation" onClick={handleClick}>
+
+      
+      {/* <Chip variant="outlined" color="primary" size="small" avatar={<Avatar>F</Avatar>} >Test</Chip>  */}
+
+
       <Breadcrumbs aria-label="breadcrumb">
         <StyledBreadcrumb
           component="a"

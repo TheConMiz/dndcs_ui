@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
@@ -67,10 +67,28 @@ export default function CustomizedDialogs(props) {
         {
           props.context &&
           
-          <BootstrapDialogTitle id="customized-dialog-title" onClose={handleToggle}>
-              {props.context.name}
-              <Tags/>
-          </BootstrapDialogTitle>
+          <Fragment>
+            <BootstrapDialogTitle id="customized-dialog-title" onClose={handleToggle}>
+                {props.context.name}
+                <Tags/>
+              </BootstrapDialogTitle>
+              <Typography>
+                {"Casting Time: " + props.context.casting_time}
+              </Typography>
+              <Typography>
+                {"Components: " + props.context.components.join(", ")}
+              </Typography>
+              <Typography>
+                {"Concentration: " + props.context.concentration}
+              </Typography>
+              <Typography>
+                {"Duration: " + props.context.duration}
+              </Typography>
+              <Typography>
+                {"Ritual: " + props.context.ritual}
+              </Typography>
+          </Fragment>
+
         }
 
         <DialogContent dividers>
@@ -78,6 +96,7 @@ export default function CustomizedDialogs(props) {
               props.context && <Typography gutterBottom>{props.context.desc.join(" ")}</Typography>
           }  
         </DialogContent>
+
         <DialogActions>
 
         </DialogActions>

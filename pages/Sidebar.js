@@ -93,9 +93,12 @@ export default function PermanentDrawerLeft() {
     fetchSpellContext(spell.url);
   }
   const toggleContext = (spell) => {
+    if (contextWindowVis) {
+      setCurrentContext(null);
+    }
+
     getCurrentContext(spell);
     setContextWindowVis(!contextWindowVis);
-    console.log(currentContext)
   }
 
   return (
@@ -189,7 +192,7 @@ export default function PermanentDrawerLeft() {
           consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa
           sapien faucibus et molestie ac.
         </Typography> */}
-        <Typography paragraph>
+        {/* <Typography paragraph>
           Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper
           eget nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim
           neque volutpat ac tincidunt. Ornare suspendisse sed nisi lacus sed viverra
@@ -201,7 +204,7 @@ export default function PermanentDrawerLeft() {
           tristique sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
           eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
           posuere sollicitudin aliquam ultrices sagittis orci a.
-        </Typography>
+        </Typography> */}
       </Box>
     </Box>
   );
