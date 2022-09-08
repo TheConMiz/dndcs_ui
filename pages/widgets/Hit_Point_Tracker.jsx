@@ -1,47 +1,96 @@
 import React from 'react'
-import { Button, Card, TextField } from '@mui/material'
+import { Button, Card, Divider, TextField, Typography } from '@mui/material'
 
 const Hit_Point_Tracker = () => {
     return (
         <Card
             variant="outlined"
             sx={{
-                width: '400px',
+                width: '330px',
                 height: '150px'
             }}
         >
             <div
                 style={{
                     display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "center",
+                    flexDirection: "row",
+                    justifyContent: "left",
                     alignItems: "center",
                 }}
             >
-                <Button>
-                    Heal
-                </Button>
-
-                <TextField
-                    id="outlined-number"
-                    type="number"
-                    size='small'
-                    sx={{
-                        width: "80px"
+                <div
+                    style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center",
                     }}
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
-                />
+                >
+                    <Button>
+                        Heal
+                    </Button>
 
-                <Button>
-                    Damage
-                </Button>
-            </div>
-            <div>
+                    <TextField
+                        id="outlined-number"
+                        type="number"
+                        size='small'
+                        sx={{
+                            width: "80px"
+                        }}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                    />
+
+                    <Button>
+                        Damage
+                    </Button>
+
+                </div>
+
+                <div
+                    style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center",
+                    }}
+                >
+                    <Typography>Current</Typography>
+                    <Typography variant="h3">100</Typography>
+
+                </div>
+
+                <div>
+                    <Typography variant="h3">/</Typography>
+                </div>
+
+                <div
+                    style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center",
+                    }}
+                >
+                    <Typography>Max</Typography>
+                    <Typography variant="h3">100</Typography>
+                </div>
                 
-            </div>
+                <div
+                    style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        alignItems: "center",
+                    }}
+                >
+                    <Typography>Temp</Typography>
+                    <Typography variant="h3">--</Typography>
+                </div>
 
+            </div>
+            
         </Card>
     )
 }

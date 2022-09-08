@@ -1,5 +1,6 @@
 import React from 'react'
 import Ability_Score_Card from './widgets/Ability_Score_Card'
+import Random_Dog from './widgets/Random_Dog'
 import Hit_Point_Tracker from './widgets/Hit_Point_Tracker'
 
 const Main = () => {
@@ -20,6 +21,7 @@ const Main = () => {
             <Ability_Score_Card mode="Charisma"></Ability_Score_Card>
 
             <Hit_Point_Tracker></Hit_Point_Tracker>
+
         </div>
 
 
