@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import Image from 'next/image';
 
-const Character_Badge = () => {
+const Random_Dog = () => {
 
     const [dog_src, set_dog_src] = useState("");
 
@@ -32,4 +32,4 @@ const Character_Badge = () => {
     )
 }
 
-export default Character_Badge
+export default Random_Dog
