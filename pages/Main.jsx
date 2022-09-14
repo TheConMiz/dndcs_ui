@@ -1,6 +1,5 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { Button, Grid, Stack } from '@mui/material'
-import { Container, maxWidth } from '@mui/system'
 
 // Self-generated components
 import Ability_Score_Card from './widgets/Ability_Score_Card'
@@ -9,12 +8,15 @@ import Random_Dog from './widgets/Random_Dog'
 import Senses_Card from './widgets/Senses_Card'
 import Saving_Throw_Card from './widgets/Saving_Throw_Card'
 import Proficiency_Card from './widgets/Proficiency_Card'
+import Tags from './Tags'
+import DetailsPane from './DetailsPane'
+import ListPane from './ListPane'
 
 
-const Main = () => {
+const CompleteView = () => {
     return (
-
         <Grid container>
+            <Tags/>
             <Grid xs={8} spacing={0}>
                 <Stack direction="row">
                     <Ability_Score_Card mode="Strength"></Ability_Score_Card>
@@ -45,9 +47,29 @@ const Main = () => {
                 <Proficiency_Card/>
             </Grid>
 
-            {/* <Grid xs={4} spacing={0}>
+            <Grid xs={4} spacing={0}>
                 <Random_Dog></Random_Dog>
-            </Grid> */}
+            </Grid>
+
+        </Grid>
+    );
+}
+
+const Main = () => {
+    return (
+
+        <Grid
+            container
+            spacing={0}
+        >
+            <Grid xs={10}>
+                <Stack
+                    direction="row"
+                >
+                    <ListPane/>
+                    <DetailsPane/>
+                </Stack>
+            </Grid>
 
         </Grid>
 

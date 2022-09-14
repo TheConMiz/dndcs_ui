@@ -11,8 +11,6 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import MoveToInbox from '@mui/icons-material/MoveToInbox';
 import ContextWindow from './ContextWindow';
 
@@ -26,34 +24,6 @@ export default function PermanentDrawerLeft() {
   const [currentContext, setCurrentContext] = useState(null)
 
   const base_url = "https://www.dnd5eapi.co";
-
-  const fetchSpells = () => {
-    const params = {
-      "method": "GET",
-      "headers": {
-        "Content-Type": "application/json"
-      }
-    }
-
-    let spell_url = base_url + "/api/spells"
-
-    fetch(spell_url, params)
-      .then(response => {
-        if (!response.ok) {
-          setError(response.status);
-        }
-        return response.json(); 
-      })
-
-      .then(data => {
-        setSpellList(data.results)
-        setError(null)
-      })
-      .catch((err) => {
-        setError(err.message)
-        setSpellList(null)
-      })
-  }
 
   const fetchSpellContext = (spell_url) => {
     const params = {
