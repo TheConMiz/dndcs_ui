@@ -1,8 +1,9 @@
-import { Paper, Tabs, Tab, TabList, Typography } from '@mui/material'
+import { Paper, Tabs, Tab, TabList, Typography, Skeleton } from '@mui/material'
 import React, { Fragment, useState } from 'react'
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux"
 import { UPDATE_HIGHLIGHTED_SPELL } from './../actions/app_actions';
+import fetch_detailed_spell from '../functions/fetch_data';
 
 
 const DetailsPane = () => {
@@ -34,24 +35,12 @@ const DetailsPane = () => {
             })
     
             .then(data => {
-                // if (selected_spell_url.length !== 0) {
-                    // console.log(data);
-                    // set_selected_spell(data);
-                // }
-
-                // else{
-                // set_spell_list(data.results);
-                // dispatch({ type: UPDATE_SPELLS, payload: data.results })
-                // console.log(data)
                 dispatch({ type: UPDATE_HIGHLIGHTED_SPELL, payload: data })
-
-                // }
                 set_error("");
             })
 
             .catch((err) => {
                 set_error(err.message);
-                // set_spell_list([]);
             })
     }
 
@@ -66,47 +55,54 @@ const DetailsPane = () => {
                 elevation={0}
                 sx={{
                     width: "40vw",
-                    height: "95vh"
+                    height: "95vh",
+                    overflow: "scroll"
                 }}
 
             >
-                <Tabs>
-                    <Tab
-                        label="Description"
-                    >
-
-
-                    </Tab>
-                    <Tab
-                        label="Notes"
-                    >
+                {
+                    highlighted_spell.length === 0 ?
+                        <Fragment>
+                            <Skeleton variant="circular" width={40} height={40} />
+                            <Skeleton variant="rectangular" width={210} height={60} />
+                            <Skeleton variant="rounded" width={210} height={60} />
+                            <Skeleton variant="text" sx={{ fontSize: '1rem' }} />
+                        </Fragment>:
                         
-                    </Tab>
-                </Tabs>
-                <Typography>
-                    {highlighted_spell.name}
-                </Typography>
+                        <Fragment>
+                            <Typography variant='h5'>
+                                {highlighted_spell.name}
+                            </Typography>
 
-                <Typography>
-                    {highlighted_spell.range}
-                </Typography>
+                            <Typography variant='h6'>
+                                {"Range: " + highlighted_spell.range}
+                            </Typography>
 
-                <Typography>
-                    {highlighted_spell.ritual}
-                </Typography>
+                            <Typography>
+                                {highlighted_spell.ritual}
+                            </Typography>
 
-                <Typography>
-                    {highlighted_spell.duration}
-                </Typography>
+                            <Typography>
+                                {"Duration: " + highlighted_spell.duration}
+                            </Typography>
+                            
+                            <Typography>
+                                {"Description: " + highlighted_spell.desc}
+                            </Typography>
+                        
+                            <Typography>
+                                {"Level: " + highlighted_spell.level}
+                            </Typography>
+
+                            <Typography>
+                                {/* {highlighted_spell} */}
+                            </Typography>
+                        </Fragment>
+                    
+
+                }
+
                 
-                <Typography>
-                    {highlighted_spell.desc}
-                </Typography>
-              
-                <Typography>
-                    {highlighted_spell.level}
-                </Typography>
-
             </Paper>
         </Fragment>
     )

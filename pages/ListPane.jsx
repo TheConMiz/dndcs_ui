@@ -2,6 +2,7 @@ import React, { Fragment } from 'react'
 import { useSelector, useDispatch } from "react-redux"
 import { UPDATE_SPELLS } from './../actions/data_actions';
 import { UPDATE_HIGHLIGHTED_SPELL } from './../actions/app_actions';
+import InfoRoundedIcon from '@mui/icons-material/InfoRounded';
 
 import {
     Paper,
@@ -11,45 +12,55 @@ import {
     TableHead,
     TableRow,
     Skeleton,
-    Button
+    Button,
+    IconButton,
+    Checkbox
 } from '@mui/material'
 import { useState, useEffect } from 'react'
 
 
 const ListPane = () => {
+    // Base 5E Endpoint
+    const base_url = "https://www.dnd5eapi.co";
+    const params = {
+        "method": "GET",
+        "headers": {
+            "Content-Type": "application/json"
+        }
+    }
+    let counter = 0;
     // State components
-    const [selected_spell, set_selected_spell] = useState("");
-    const [selected_spell_url, set_selected_spell_url] = useState("");
+    const [detailed_spell_urls, set_detailed_spell_urls] = useState([]);
     const [error, set_error] = useState("");
-    
     // Obtain list of spells from redux state.
     const spell_list = useSelector(state => state.data.spells);
     const highlighted_spell = useSelector(state => state.app.highlighted_spell);
-
     // Bind useDispatch function to a variable
     const dispatch = useDispatch();
-
     // Component defining a filled data row.
     const Filled_Row = (data, key) => {
         return (
             <TableRow
                 hover
-                onClick={() => {
-                    let extracted_url = data.data.url.toString()
-                    dispatch({ type: UPDATE_HIGHLIGHTED_SPELL, payload: extracted_url })
-
-
-                }}
             >
+                <TableCell>
+                    <Checkbox/>
+                </TableCell>
                 <TableCell>
                     {
                         data.data.name.toString()
                     }
                 </TableCell>
                 <TableCell>
-                    {
-                        data.data.url.toString()
-                    }
+                    <IconButton
+                        size="medium"
+                        onClick={() => {
+                            let extracted_url = data.data.url.toString()
+                            dispatch({ type: UPDATE_HIGHLIGHTED_SPELL, payload: extracted_url })
+                        }}
+                    >
+                        <InfoRoundedIcon/>
+                    </IconButton>
                 </TableCell>
             </TableRow>
         )
@@ -67,33 +78,11 @@ const ListPane = () => {
     
         )
     }
-
-    // Interface function for re-using fetch_spells for both spell list and specific spells. 
-    const prepare_fetch_spell = () => {
-        const base_url = "https://www.dnd5eapi.co";
-        let spell_url = "";
-
-        // if (selected_spell_url.length === 0) {
-            spell_url = base_url + "/api/spells";
-        // }
-
-        // else {
-            // spell_url = base_url + selected_spell_url
-        // }
-
-        return spell_url;
-    }
-
     // Function for calling the DND5E API to obtain a list of spells or individual spell data.
     const fetch_spells = () => {
-        const spell_url = prepare_fetch_spell();
+        let spell_url = base_url + "/api/spells";
 
-        const params = {
-            "method": "GET",
-            "headers": {
-                "Content-Type": "application/json"
-            }
-        }
+        let temp_urls = [];
     
         fetch(spell_url, params)
             
@@ -105,29 +94,59 @@ const ListPane = () => {
             })
     
             .then(data => {
-                // if (selected_spell_url.length !== 0) {
-                    // console.log(data);
-                    // set_selected_spell(data);
-                // }
-
-                // else{
-                // set_spell_list(data.results);
+                data.results.map((item) => {
+                    temp_urls.push(item.url)
+                })
                 dispatch({ type: UPDATE_SPELLS, payload: data.results })
-
-                // }
-                set_error("");
+                set_detailed_spell_urls(temp_urls)
             })
 
             .catch((err) => {
                 set_error(err.message);
-                // set_spell_list([]);
             })
     }
     
+    // Asynchronous data retrieval - get detailed spell data.
+    const fetch_detailed_spells = () => {
+
+        const promises = detailed_spell_urls.map((url) => {
+            let spell_url = base_url + url
+
+            return fetch(spell_url, params)
+                .then(response => {
+                    if (!response.ok) {
+                        set_error(response.status);
+                    }
+                    counter += 1;
+                    return response.json(); 
+                })
+                .then((data) => {
+                    // console.log(data);
+                    console.log(counter);
+
+                    set_error("");
+                    return data;
+
+                })
+                .catch((err) => {
+                    set_error(err.message);
+                })
+        })
+        
+        Promise.all(promises).then(results => {
+            const spells = results.map(result => {
+                return result
+            });
+            console.log(spells);
+            dispatch({ type: UPDATE_SPELLS, payload: spells })
+
+        })
+        
+    }
+
     useEffect(() => {
         fetch_spells();
     }, []);
-
 
     return (
         <Fragment>
@@ -139,11 +158,21 @@ const ListPane = () => {
                     overflow: "scroll"
                 }}
             >
+                <Button
+                    variant='outlined'
+                    onClick={fetch_detailed_spells}
+                >
+                    Test
+                </Button>
 
                 <Table>
-                    {/* <TableHead>
-                        
-                    </TableHead> */}
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Prepared</TableCell>
+                            <TableCell>Name</TableCell>
+                            <TableCell>Details</TableCell>
+                        </TableRow>
+                    </TableHead>
 
                     <TableBody>
 
