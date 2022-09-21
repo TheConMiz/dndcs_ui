@@ -8,12 +8,9 @@ function MyApp({ Component, pageProps }) {
       <Component {...pageProps} />
     </Provider>
     
-    // <Component {...pageProps} /> 
-
   )
   
 }
 
 export default wrapper.withRedux(MyApp);
-// export default MyApp;
 
