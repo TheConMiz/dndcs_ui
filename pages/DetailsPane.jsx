@@ -54,8 +54,8 @@ const DetailsPane = () => {
                 variant='outlined'
                 elevation={0}
                 sx={{
-                    width: "40vw",
-                    height: "95vh",
+                    width: "45vw",
+                    height: "50vh",
                     overflow: "scroll"
                 }}
 

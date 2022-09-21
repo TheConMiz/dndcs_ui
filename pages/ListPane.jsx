@@ -153,9 +153,9 @@ const ListPane = () => {
 
             <Paper
                 sx={{
-                    width: "40vw",
-                    height: "95vh",
-                    overflow: "scroll"
+                    width: "45vw",
+                    height: "50vh",
+                    overflow: "scroll",
                 }}
             >
                 <Button
