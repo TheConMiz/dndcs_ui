@@ -2,9 +2,8 @@ import { Paper, Tabs, Tab, TabList, Typography, Skeleton } from '@mui/material'
 import React, { Fragment, useState } from 'react'
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux"
-import { UPDATE_HIGHLIGHTED_SPELL } from './../actions/app_actions';
-import fetch_detailed_spell from '../functions/fetch_data';
-
+import { UPDATE_HIGHLIGHTED_SPELL } from './../../actions/app_actions';
+import fetch_detailed_spell from './../../functions/fetch_data';
 
 const DetailsPane = () => {
 
@@ -14,39 +13,39 @@ const DetailsPane = () => {
     const dispatch = useDispatch();
 
 
-    const fetch_detailed_spell = () => {
-        const base_url = "https://www.dnd5eapi.co";
-        const spell_url = base_url + highlighted_spell;
+    // const fetch_detailed_spell = () => {
+    //     const base_url = "https://www.dnd5eapi.co";
+    //     const spell_url = base_url + highlighted_spell;
 
-        const params = {
-            "method": "GET",
-            "headers": {
-                "Content-Type": "application/json"
-            }
-        }
+    //     const params = {
+    //         "method": "GET",
+    //         "headers": {
+    //             "Content-Type": "application/json"
+    //         }
+    //     }
     
-        fetch(spell_url, params)
+    //     fetch(spell_url, params)
             
-            .then(response => {
-                if (!response.ok) {
-                    set_error(response.status);
-                }
-                return response.json(); 
-            })
+    //         .then(response => {
+    //             if (!response.ok) {
+    //                 set_error(response.status);
+    //             }
+    //             return response.json(); 
+    //         })
     
-            .then(data => {
-                dispatch({ type: UPDATE_HIGHLIGHTED_SPELL, payload: data })
-                set_error("");
-            })
+    //         .then(data => {
+    //             dispatch({ type: UPDATE_HIGHLIGHTED_SPELL, payload: data })
+    //             set_error("");
+    //         })
 
-            .catch((err) => {
-                set_error(err.message);
-            })
-    }
+    //         .catch((err) => {
+    //             set_error(err.message);
+    //         })
+    // }
 
-    useEffect(() => {
-        fetch_detailed_spell();
-    }, [highlighted_spell]);
+    // useEffect(() => {
+    //     fetch_detailed_spell();
+    // }, [highlighted_spell]);
 
     return (    
         <Fragment>
@@ -98,8 +97,6 @@ const DetailsPane = () => {
                                 {/* {highlighted_spell} */}
                             </Typography>
                         </Fragment>
-                    
-
                 }
 
                 

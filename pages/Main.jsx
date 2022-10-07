@@ -1,9 +1,12 @@
 import React, { Fragment } from 'react'
 import { Button, Grid, Box, ThemeProvider, createTheme } from '@mui/material'
 import { red, blue } from '@mui/material/colors';
-// Self-generated components
-import DetailsPane from './DetailsPane'
-import ListPane from './ListPane'
+// Self-generated UI components
+import DetailsPane from './ui/DetailsPane'
+import ListPane from './ui/ListPane'
+import UIController from "./middleware/UIController";
+import DataController from "./middleware/DataController";
+
 
 const sx = {
     width: "100vw",
@@ -24,18 +27,22 @@ const theme = createTheme({
 
         }
     },
-  });
-
-const Main = () => {
+});
+  
+const AppBody = () => {
     return (
         <ThemeProvider theme={theme}>
+            
+            <UIController />
+            <DataController />
+            
             <Box
                 sx={sx}
             >
                 <Grid
                     sx={{
-                        width: "100vw",
-                        height: "100vh",
+                        width: "100%",
+                        height: "100%",
                     }}
                     container
                     direction="row"
@@ -44,12 +51,17 @@ const Main = () => {
                 >
                     <ListPane/>
 
-                    <DetailsPane/>
+                    {/* <DetailsPane/> */}
 
                 </Grid>
             </Box>
         </ThemeProvider>
- 
+    );
+}
+
+const Main = () => {
+    return (
+        <AppBody/>
     )
 }
 
