@@ -13,7 +13,7 @@ import { Avatar, Grid } from '@mui/material';
 import ListPane from '../ui/ListPane';
 import IosShareIcon from '@mui/icons-material/IosShare';
 
-const drawerWidth = 55;
+const drawerWidth = 500;
 
 const sx_drawer = {
   width: drawerWidth,
