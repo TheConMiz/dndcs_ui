@@ -1,27 +1,29 @@
 import React from 'react'
 import { ThemeProvider, createTheme } from '@mui/material'
 import { red, blue } from '@mui/material/colors';
-import Sidebar from "./../unused/Sidebar"
+import Sidebar from "./Sidebar"
+import ListPane from './ListPane';
 
-const theme = createTheme({
+const base_theme = createTheme({
     palette: {
+        type: 'light',
         primary: {
-            main: red[500],
-            dark: red[900],
+          main: '#3f8db5',
         },
         secondary: {
-            main: blue[500],
-            dark: blue[300],
-        }
+          main: '#f50057',
+        },
+        background: {
+          default: '#ffffff',
+          paper: '#fbf6ea',
+        },
     },
 });
 
 const UIShell = () => {
     return (
-        <ThemeProvider theme={theme}>
-            <Sidebar>
-                
-            </Sidebar>
+        <ThemeProvider theme={base_theme}>
+            <Sidebar/>
         </ThemeProvider>
     )
 }

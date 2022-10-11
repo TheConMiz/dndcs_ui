@@ -14,7 +14,6 @@ const DataController = () => {
         }
     }
     // State components
-    const [detailed_spell_urls, set_detailed_spell_urls] = useState([]);
     const [error, set_error] = useState("");
     // Obtain list of spells from redux state.
     const spell_list = useSelector(state => state.data.spells);
@@ -23,8 +22,8 @@ const DataController = () => {
     // Function for calling the DND5E API to obtain a list of spells or individual spell data.
     const fetch_spells = () => {
         let spell_url = base_url + "/api/spells";
-
-        let temp_urls = [];
+        // Define an array for storing the modified list of spell URLs
+        let modified_list = [];
         // Make an API call to get the list of spells.
         fetch(spell_url, params)
             .then(response => {
@@ -36,10 +35,10 @@ const DataController = () => {
             // With the list of spells, 
             .then(data => {
                 data.results.map((item) => {
-                    temp_urls.push(item.url)
+                    let new_item = { id: item.index, ...item }
+                    modified_list.push(new_item);
                 })
-                dispatch({ type: UPDATE_SPELLS, payload: data.results })
-                set_detailed_spell_urls(temp_urls)
+                dispatch({ type: UPDATE_SPELLS, payload: modified_list })
             })
             .then(() => {
                 fetch_detailed_spells();

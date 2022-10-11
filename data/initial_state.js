@@ -1,6 +1,6 @@
 const initalState = {
     app: {
-        settings_page: false,
+        settings_toggle: false,
         settings: {
             dark_mode: false,
         },
