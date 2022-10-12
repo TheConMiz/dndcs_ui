@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, Fragment} from 'react'
 import { useSelector, useDispatch } from "react-redux"
 import { UPDATE_SPELLS } from './../../actions/data_actions';
 import { UPDATE_HIGHLIGHTED_SPELL } from './../../actions/app_actions';
@@ -15,44 +15,14 @@ const DataController = () => {
     }
     // State components
     const [error, set_error] = useState("");
-    // Obtain list of spells from redux state.
-    const spell_list = useSelector(state => state.data.spells);
     // Bind useDispatch function to a variable
     const dispatch = useDispatch();
-    // Function for calling the DND5E API to obtain a list of spells or individual spell data.
-    const fetch_spells = () => {
-        let spell_url = base_url + "/api/spells";
-        // Define an array for storing the modified list of spell URLs
-        let modified_list = [];
-        // Make an API call to get the list of spells.
-        fetch(spell_url, params)
-            .then(response => {
-                if (!response.ok) {
-                    set_error(response.status);
-                }
-                return response.json(); 
-            })
-            // With the list of spells, 
-            .then(data => {
-                data.results.map((item) => {
-                    let new_item = { id: item.index, ...item }
-                    modified_list.push(new_item);
-                })
-                dispatch({ type: UPDATE_SPELLS, payload: modified_list })
-            })
-            .then(() => {
-                fetch_detailed_spells();
-            })
-            .catch((err) => {
-                set_error(err.message);
-            })        
-    }
     // Asynchronous data retrieval - get detailed spell data.
-    const fetch_detailed_spells = () => {
-        console.log("Fetching detailed spell info.")
+    const fetch_detailed_spells = (detailed_spell_list) => {
         // Define one Promise for each spell in the list.
-        const promises = detailed_spell_urls.map((url) => {
-            let spell_url = base_url + url
+        // console.log(detailed_spell_list)
+        const promises = detailed_spell_list.map((spell) => {
+            let spell_url = base_url + spell.url
             // Fetch each Promise variable one by one.
             return fetch(spell_url, params)
                 .then(response => {
@@ -73,13 +43,43 @@ const DataController = () => {
         Promise.all(promises)
             .then(results => {
                 const spells = results.map(result => {
-                    return result
+                    let modded_result = { id: result._id, ...result }
+                    return modded_result
                 });
-                // dispatch({ type: UPDATE_SPELLS, payload: spells })
+                console.log(spells)
+                dispatch({ type: UPDATE_SPELLS, payload: spells })
+            })
+            // .then(() => {
+            //     // console.log("Done fetching.")           
+            // })
+    }
+    // Function for calling the DND5E API to obtain a list of spells or individual spell data.
+    const fetch_spells = () => {
+        let spell_url = base_url + "/api/spells";
+        // Define an array for storing the modified list of spell URLs
+        let modified_list = [];
+        // Make an API call to get the list of spells.
+        fetch(spell_url, params)
+            .then(response => {
+                if (!response.ok) {
+                    set_error(response.status);
+                }
+                return response.json(); 
+            })
+            //! Modify the spell to include an ID field, so that it can be used with the DataGrid.
+            .then(data => {
+                data.results.map((item) => {
+                    let new_item = { id: item.index, ...item }
+                    modified_list.push(new_item);
+                })
             })
             .then(() => {
-                console.log("Done fetching.")                
+                fetch_detailed_spells(modified_list);
             })
+            .catch((err) => {
+                set_error(err.message);
+            })
+        
     }
 
     useEffect(() => {
@@ -87,7 +87,7 @@ const DataController = () => {
     }, []);
 
     return (
-        <div>DataController</div>
+        <Fragment/>
     )
 }
 

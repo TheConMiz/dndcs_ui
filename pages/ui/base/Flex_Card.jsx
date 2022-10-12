@@ -6,11 +6,11 @@ const Flex_Card = (props) => {
 		<Paper
 			elevation={1}
 			sx={{
-				maxWidth: "95vw",
-				// width: "90vw",
-				height: "50vh",
+				maxWidth: props.maxWidth,
+				width: props.width,
+				height: props.height,
 				overflow: "scroll",
-				// flexShrink: 1,
+				flexShrink: 1,
 				// whiteSpace: 'nowrap',
 				// boxSizing: 'border-box',
 			}}

@@ -27,7 +27,11 @@ const ListPane = () => {
     ];
 
     return (
-        <Flex_Card>
+        <Flex_Card
+            maxWidth="50vw"
+            width="50vw"
+            height="50vh"
+        >
             <DataGrid
                 rows={spell_list}
                 rowHeight={40}

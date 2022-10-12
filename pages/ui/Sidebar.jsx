@@ -138,8 +138,9 @@ import MailIcon from '@mui/icons-material/Mail';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import SettingsIcon from '@mui/icons-material/Settings';
+import { Grid } from '@mui/material';
 
-import ListPane from './ListPane';
+import UIBody from './UIBody';
 
 const drawerWidth = 200;
 
@@ -190,7 +191,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 	}),
 );
 
-export default function MiniDrawer() {
+const Sidebar = () => {
 	// const theme = useTheme();
 	const [expand, setExpand] = useState(false);
 
@@ -270,16 +271,13 @@ export default function MiniDrawer() {
 							</ListItemButton>
 						</ListItem>
 					</List>
-
 				</DrawerHeader>
-
 			</Drawer>
 
-			{/* Define the main body content here */}
-			<Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-				<ListPane />
-			</Box>
+			<UIBody/>
 
 		</Box>
 	);
 }
+
+export default Sidebar
