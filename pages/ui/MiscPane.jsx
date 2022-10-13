@@ -6,9 +6,8 @@ import { Typography } from '@mui/material'
 const MiscPane = () => {
     return (
         <Flex_Card
-            height="30px"
-            width="94vw"
-            maxWidth="94vw"
+            height="5"
+            width="90"
         >
             <Typography>
                 Just a test

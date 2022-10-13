@@ -30,12 +30,25 @@ const UIBody = () => {
                         overflow: "scroll"
                     }}
                     container
-                    direction="row"
-                    justifyContent="space-around"
-                    alignItems="flex-start"
+                    direction="column"
+                    justifyContent="flex-start"
+                    alignItems="center"
+                    spacing={2}
                 >
-                    <ListPane />
-                    <MiscPane />
+                    {/* <Grid
+                        item
+                        xs={12}
+                    > */}
+                        <ListPane />
+
+                    {/* </Grid> */}
+                    {/* <Grid
+                        xs={12}
+                        item
+                    > */}
+                        <MiscPane />
+
+                    {/* </Grid> */}
                    
                 </Grid>
             </Box>

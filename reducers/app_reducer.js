@@ -1,7 +1,7 @@
 import {
     UPDATE_HIGHLIGHTED_SPELL,
+    UPDATE_CONTEXT_TOGGLE,
     // UPDATE_CLASSES,
-    // UPDATE_STATE_SETTINGS_MENU
 } from './../actions/app_actions';
 
 export default function app_reducer(state = [], action) {
@@ -9,9 +9,7 @@ export default function app_reducer(state = [], action) {
     switch (action.type) {
         case UPDATE_HIGHLIGHTED_SPELL: 
             return Object.assign({}, state, {
-                
                 highlighted_spell: action.payload
-                
             });
         
         // case UPDATE_CLASSES:
@@ -19,10 +17,12 @@ export default function app_reducer(state = [], action) {
         //         classes: action.payload
         //     });
         
-        // case UPDATE_STATE_SETTINGS_MENU:
-        //     return Object.assign({}, state, {
-        //         settingsOpen: action.payload
-        //     });
+        case UPDATE_CONTEXT_TOGGLE:
+            return Object.assign({}, state, {
+                settings: Object.assign({}, state.settings, {
+                    context_toggle: action.payload,
+                })
+            });
         
         default:
             return state

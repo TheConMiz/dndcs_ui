@@ -1,14 +1,14 @@
 const initalState = {
     app: {
-        settings_toggle: false,
         settings: {
+            settings_toggle: false,
+            context_toggle: false,
             dark_mode: false,
         },
         highlighted_spell: "",
         endpoints: {
             srd: ""
         },
-
     },
     data: {
         spells: [],
