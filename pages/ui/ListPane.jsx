@@ -1,20 +1,7 @@
-import React, { Fragment, useRef} from 'react'
-import { useSelector, useDispatch,  } from "react-redux"
+import React from 'react'
+import { useSelector } from "react-redux"
 import { DataGrid } from '@mui/x-data-grid';
-import InfoRoundedIcon from '@mui/icons-material/InfoRounded';
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableRow,
-    Skeleton,
-    IconButton,
-    Checkbox
-} from '@mui/material'
-import { useState, useEffect } from 'react'
 import Flex_Card from './base/Flex_Card';
-
 
 const ListPane = () => {
     // State components
@@ -23,24 +10,25 @@ const ListPane = () => {
     const columns = [
         // { field: 'prepared', headerName: 'Prepared', width: 70 },
         { field: 'name', headerName: 'Name', width: "200", sortable: true },
-        { field: 'url', headerName: 'Details', width: "200" },
+        { field: 'desc', headerName: 'Description', width: "600" },
+        // { field: '', headerName: 'Save', width: "200" },
+        // { field: '', headerName: 'School', width: "200" },
+        { field: 'casting_time', headerName: 'Time', width: "75" },
+        { field: 'range', headerName: 'Range', width: "75" },
+        { field: 'components', headerName: 'Comp.', width: "75" },
     ];
 
     return (
         <Flex_Card
-            maxWidth="50vw"
-            width="50vw"
-            height="50vh"
+            width="80"
+            height="50"
         >
             <DataGrid
                 rows={spell_list}
                 rowHeight={40}
                 columns={columns}
                 pageSize={15}
-                // autoPageSize
                 density='standard'
-                // rowsPerPageOptions={[5]}
-                // checkboxSelection
                 loading={spell_list.length <= 0 ? true: false}
             />
         </Flex_Card>

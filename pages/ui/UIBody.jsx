@@ -4,6 +4,7 @@ import { Grid } from '@mui/material';
 
 import ListPane from './ListPane';
 import MiscPane from './MiscPane';
+import Flex_Card from './base/Flex_Card';
 
 
 const UIBody = () => {
@@ -35,7 +36,7 @@ const UIBody = () => {
                 >
                     <ListPane />
                     <MiscPane />
-                    
+                   
                 </Grid>
             </Box>
       </Box>
