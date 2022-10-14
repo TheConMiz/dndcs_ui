@@ -2,13 +2,9 @@ import React, { useState } from 'react'
 import { useSelector, useDispatch } from "react-redux"
 import { DataGrid } from '@mui/x-data-grid';
 import Flex_Card from './base/Flex_Card';
-import ContextWindow from "./unused/ContextWindow"
 import { UPDATE_HIGHLIGHTED_SPELL, UPDATE_CONTEXT_TOGGLE } from './../../actions/app_actions';
 
-
-
 const ListPane = () => {
-    const [toggle, setToggle] = useState(false);
     // Obtain list of spells from redux state.
     const spell_list = useSelector(state => state.data.spells);
     const context_toggle = useSelector(state => state.app.settings.context_toggle);
@@ -20,7 +16,7 @@ const ListPane = () => {
         { field: 'desc', headerName: 'Description', width: "600" },
         // { field: '', headerName: 'Save', width: "200" },
         // { field: '', headerName: 'School', width: "200" },
-        { field: 'casting_time', headerName: 'Time', width: "75" },
+        { field: 'casting_time', headerName: 'Time', width: "120" },
         { field: 'range', headerName: 'Range', width: "75" },
         { field: 'components', headerName: 'Comp.', width: "75" },
     ];
@@ -34,8 +30,8 @@ const ListPane = () => {
 
     return (
         <Flex_Card
-            width="80"
-            height="50"
+            width="60"
+            height="95"
         >
             <DataGrid
                 rows={spell_list}

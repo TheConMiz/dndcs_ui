@@ -1,4 +1,4 @@
-import React, {useState, useEffect, Fragment} from 'react';
+import React, {Fragment} from 'react';
 import { useSelector, useDispatch } from "react-redux"
 import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
@@ -9,7 +9,7 @@ import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
-import { UPDATE_CONTEXT_TOGGLE } from './../../../actions/app_actions';
+import { UPDATE_CONTEXT_TOGGLE } from './../../actions/app_actions';
 import { Box } from '@mui/system';
 
 
