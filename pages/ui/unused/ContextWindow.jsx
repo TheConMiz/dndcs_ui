@@ -1,7 +1,6 @@
-import React, { useState, Fragment, useEffect } from 'react';
+import React, {useState, useEffect, Fragment} from 'react';
 import { useSelector, useDispatch } from "react-redux"
-
-import PropTypes from 'prop-types';
+import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -10,7 +9,9 @@ import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
-import Tags from './Tags'
+import { UPDATE_CONTEXT_TOGGLE } from './../../../actions/app_actions';
+import { Box } from '@mui/system';
+
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 	'& .MuiDialogContent-root': {
@@ -21,99 +22,96 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 	},
 }));
 
-const BootstrapDialogTitle = (props) => {
-	const { children, onClose, ...other } = props;
 
-	return (
-		<DialogTitle sx={{ m: 0, p: 2 }} {...other}>
-			{children}
-			{onClose ? (
-				<IconButton
-					aria-label="close"
-					onClick={onClose}
-					sx={{
-						position: 'absolute',
-						right: 8,
-						top: 8,
-						color: (theme) => theme.palette.grey[500],
-					}}
-				>
-					<CloseIcon />
-				</IconButton>
-			) : null}
-		</DialogTitle>
-	);
-};
-
-BootstrapDialogTitle.propTypes = {
-	children: PropTypes.node,
-	onClose: PropTypes.func.isRequired,
-};
-
-export default function CustomizedDialogs(props) {
-
-	const handleToggle = () => {
-		props.toggle(!props.toggleValue)
+const CustomizedDialogs = () => {
+	const highlighted_spell = useSelector(state => state.app.highlighted_spell);
+	const context_toggle = useSelector(state => state.app.settings.context_toggle);
+	
+	const toggle_context_menu = () => {
+		dispatch({ type: UPDATE_CONTEXT_TOGGLE, payload: !context_toggle })
 	};
 
-	const highlighted_spell = useSelector(state => state.app.highlighted_spell);
-	const spell_list = useSelector(state => state.data.spells);
-	const [context, setContext] = useState(highlighted_spell);
-	
-	const get_spell_context = () => {
-		let new_context = spell_list.find((spell) => spell.index === highlighted_spell);
-		console.log(new_context)
-		setContext(new_context);
-	}
+	const filtered_values = ["_id", "id", "index", "url"];
 
-    useEffect(() => {
-        get_spell_context();
-    }, [context]);
+	
+	// Bind useDispatch function to a variable
+	const dispatch = useDispatch();
+	
+	const BootstrapDialogTitle = (props) => {
+		const { children, onClose, ...other } = props;
+	
+		return (
+			<DialogTitle sx={{ m: 0, p: 2 }} {...other}>
+				{children}
+				{onClose ? (
+					<IconButton
+						aria-label="close"
+						onClick={onClose}
+						sx={{
+							position: 'absolute',
+							right: 8,
+							top: 8,
+							color: (theme) => theme.palette.grey[500],
+						}}
+					>
+						<CloseIcon />
+					</IconButton>
+				) : null}
+			</DialogTitle>
+		);
+	};
 
 	return (
-		<div>
-			<BootstrapDialog
-				// onClose={handleToggle}
-				aria-labelledby="customized-dialog-title"
-				// open={props.toggle}
-			>
+		<BootstrapDialog
+			onClose={toggle_context_menu}
+			aria-labelledby="customized-dialog-title"
+			open={context_toggle}
+		>
+			<BootstrapDialogTitle id="customized-dialog-title" onClose={toggle_context_menu}>
 				{
-					highlighted_spell &&
-					<Fragment>
-						{/* <BootstrapDialogTitle id="customized-dialog-title" onClose={handleToggle}>
-							{context.name}
-							<Tags />
-						</BootstrapDialogTitle>
-						<Typography>
-							{"Casting Time: " + context.casting_time}
-						</Typography>
-						<Typography>
-							{"Components: " + context.components.join(", ")}
-						</Typography>
-						<Typography>
-							{"Concentration: " + context.concentration}
-						</Typography>
-						<Typography>
-							{"Duration: " + context.duration}
-						</Typography>
-						<Typography>
-							{"Ritual: " + context.ritual}
-						</Typography> */}
-							{context}
-					</Fragment>
-
+					highlighted_spell.name
 				}
+			</BootstrapDialogTitle>
+			
+			<DialogContent dividers>
+				{
+					//TODO: filter out unnecessary keys.
+					Object.keys(highlighted_spell).filter((item)=>item !== !filtered_values.includes(item)).map((item) => {
+						return (
+							<Fragment
+								key={item}
+							>
+								<Typography
+									gutterBottom
+								>
+									<Box
+										sx={{fontWeight: "bold", textTransform: 'capitalize'}}
+									>
+										{item}
 
-				<DialogContent dividers>
-					{
-						// context && <Typography gutterBottom>{context.desc.join(" ")}</Typography>
-					}
-				</DialogContent>
+									</Box>
+									<Box
+									>
+										{highlighted_spell[item].toString()}
+									</Box>
+								</Typography>
 
-				<DialogActions>
 
-				</DialogActions>
-			</BootstrapDialog>
-		</div>
+							</Fragment>
+
+						);
+					})
+				}
+			</DialogContent>
+
+			<DialogActions>
+				<Button autoFocus onClick={toggle_context_menu}>
+					Close
+				</Button>
+			</DialogActions>
+		
+		</BootstrapDialog>
 	);
 }
+
+export default CustomizedDialogs

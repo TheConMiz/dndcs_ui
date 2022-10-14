@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux"
 import { DataGrid } from '@mui/x-data-grid';
 import Flex_Card from './base/Flex_Card';
 import ContextWindow from "./unused/ContextWindow"
-import { Button } from '@mui/material';
 import { UPDATE_HIGHLIGHTED_SPELL, UPDATE_CONTEXT_TOGGLE } from './../../actions/app_actions';
 
 
@@ -28,6 +27,11 @@ const ListPane = () => {
     // Bind useDispatch function to a variable
     const dispatch = useDispatch();
 
+    const get_spell_context = (highlighted_spell) => {
+        let new_context = spell_list.find((spell) => spell.index === highlighted_spell);
+        return new_context;
+	}
+
     return (
         <Flex_Card
             width="80"
@@ -42,11 +46,11 @@ const ListPane = () => {
                 loading={spell_list.length <= 0 ? true : false}
                 onRowClick={(event) => {
                     // Do this to display the spell information in a pop-up window.
-                    dispatch({ type: UPDATE_HIGHLIGHTED_SPELL, payload: event.row.index })
+                    let highlighted_spell = get_spell_context(event.row.index);
+                    dispatch({ type: UPDATE_HIGHLIGHTED_SPELL, payload: highlighted_spell })
                     dispatch({ type: UPDATE_CONTEXT_TOGGLE, payload: !context_toggle })
                 }}
             />
-            {/* <ContextWindow/> */}
         </Flex_Card>
     )
 }

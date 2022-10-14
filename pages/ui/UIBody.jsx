@@ -4,7 +4,7 @@ import { Grid } from '@mui/material';
 
 import ListPane from './ListPane';
 import MiscPane from './MiscPane';
-import Flex_Card from './base/Flex_Card';
+import ContextWindow from "./unused/ContextWindow";
 
 
 const UIBody = () => {
@@ -35,21 +35,11 @@ const UIBody = () => {
                     alignItems="center"
                     spacing={2}
                 >
-                    {/* <Grid
-                        item
-                        xs={12}
-                    > */}
-                        <ListPane />
+                    <ListPane />
+                    <MiscPane />
 
-                    {/* </Grid> */}
-                    {/* <Grid
-                        xs={12}
-                        item
-                    > */}
-                        <MiscPane />
+                    <ContextWindow/>
 
-                    {/* </Grid> */}
-                   
                 </Grid>
             </Box>
       </Box>
