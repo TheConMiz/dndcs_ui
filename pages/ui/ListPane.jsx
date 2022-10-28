@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useSelector, useDispatch } from "react-redux"
 import { DataGrid } from '@mui/x-data-grid';
 import Flex_Card from './base/Flex_Card';
@@ -30,8 +30,8 @@ const ListPane = () => {
 
     return (
         <Flex_Card
-            width="60"
-            height="95"
+            width="75"
+            height="90"
         >
             <DataGrid
                 rows={spell_list}

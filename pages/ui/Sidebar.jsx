@@ -75,7 +75,8 @@ const Sidebar = () => {
 	return (
 		<Box sx={{ display: 'flex' }}>
 			<Drawer variant="permanent" open={expand}>
-				<div style={{height: "50px"}}></div>				
+				
+				<div style={{ height: "50px" }}></div>				
 
 				<Divider />
 				
