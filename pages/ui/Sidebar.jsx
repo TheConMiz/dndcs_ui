@@ -4,17 +4,24 @@ import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
+
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import LightModeIcon from '@mui/icons-material/LightMode';
+
 import DarkModeIcon from '@mui/icons-material/DarkMode';
+
 import SettingsIcon from '@mui/icons-material/Settings';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
+import PetsIcon from '@mui/icons-material/Pets';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
+import FaceRetouchingNaturalIcon from '@mui/icons-material/FaceRetouchingNatural';
+import HikingIcon from '@mui/icons-material/Hiking';
 
-
-import UIBody from './UIBody';
+import { Avatar, Tooltip } from '@mui/material';
+import Sidebar_Item from './base/Sidebar_Item';
+import Sidebar_Logo_Item from './base/Sidebar_Logo_Item';
 
 const drawerWidth = 200;
 
@@ -39,15 +46,6 @@ const closedMixin = (theme) => ({
 	},
 });
 
-const DrawerHeader = styled('div')(({ theme }) => ({
-	display: 'flex',
-	alignItems: 'center',
-	justifyContent: 'center',
-	padding: theme.spacing(0, 1),
-	// necessary for content to be below app bar
-	...theme.mixins.toolbar,
-}));
-
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
 	({ theme, open }) => ({
 		width: drawerWidth,
@@ -65,93 +63,127 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 	}),
 );
 
-const Sidebar = () => {
+
+
+const Sidebar = (props) => {
 	const [expand, setExpand] = useState(false);
 
 	const toggleSidebar = () => {
 		expand ? setExpand(false) : setExpand(true);
 	}
 
+	const sidebar_items_data = [
+		{
+			"name": "Overview",
+			"tooltip": "Overview",
+			"icon": <DashboardIcon />,
+			"onHover": "",
+			"onClick": ""
+		},
+		{
+			"name": "Character",
+			"tooltip": "Character",
+			"icon": <HikingIcon />,
+			"onHover": "",
+			"onClick": ""
+		},
+		{
+			"name": "Spells",
+			"tooltip": "Spells",
+			"icon": <AutoFixHighIcon />,
+			"onHover": "",
+			"onClick": ""
+		},
+		{
+			"name": "Equipment",
+			"tooltip": "Equipment",
+			"icon": <FaceRetouchingNaturalIcon />,
+			"onHover": "",
+			"onClick": ""
+		},
+		{
+			"name": "Companions",
+			"tooltip": "Companions",
+			"icon": <PetsIcon />,
+			"onHover": "",
+			"onClick": ""
+		}
+	];
+
+	const settings_items = [
+		{
+			"name": "Light Mode",
+			"tooltip": "Light Mode",
+			"icon": <LightModeIcon />,
+			"onHover": "",
+			"onClick": ""
+		},
+		{
+			"name": "Settings",
+			"tooltip": "Settings",
+			"icon": <SettingsIcon />,
+			"onHover": "",
+			"onClick": ""
+		},
+		{
+			"name": "Expand",
+			"tooltip": "Expand",
+			"icon": expand ? <ChevronLeftIcon /> : <ChevronRightIcon/>,
+			"onHover": "",
+			"onClick": toggleSidebar
+		},
+	];
+
 	return (
 		<Box sx={{ display: 'flex' }}>
 			<Drawer variant="permanent" open={expand}>
-				
-				<div style={{ height: "50px" }}></div>				
+				{/* 
+					Org. Cows Logo
+				*/}
+				<List>
+					<Sidebar_Logo_Item/>
+				</List>
 
 				<Divider />
+
+				{/* 
+					Main Pages
+				*/}
+
+				<List>
+					{
+						sidebar_items_data.map((item) => {
+							return (
+								<Sidebar_Item
+									key={item.name}
+									data={item}
+									expand={expand}
+								/>
+							)	
+						})
+					}
+				</List>
+			
+				<Divider/>
 				
 				<List>
-					<ListItem disablePadding sx={{ display: 'block' }}>
-						<ListItemButton
-							sx={{
-								minHeight: 48,
-								justifyContent: expand ? 'initial' : 'center',
-								px: 2.5,
-							}}
-							onClick={toggleSidebar}
-						>
-							<ListItemIcon
-								sx={{
-									minWidth: 0,
-									mr: 'auto',
-									justifyContent: 'center',
-								}}
-							>
-								{expand ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-
-							</ListItemIcon>
-						</ListItemButton>
-					</ListItem>
-
-					<ListItem disablePadding sx={{ display: 'block' }}>
-						<ListItemButton
-							sx={{
-								minHeight: 48,
-								justifyContent: expand ? 'initial' : 'center',
-								px: 2.5,
-							}}
-							// onClick={}
-						>
-							<ListItemIcon
-								sx={{
-									minWidth: 0,
-									mr: 'auto',
-									justifyContent: 'center',
-								}}
-							>
-								<LightModeIcon/>
-
-							</ListItemIcon>
-						</ListItemButton>
-					</ListItem>
-
-					<ListItem disablePadding sx={{ display: 'block' }}>
-						<ListItemButton
-							sx={{
-								minHeight: 48,
-								justifyContent: expand ? 'initial' : 'center',
-								px: 2.5,
-							}}
-							// onClick={toggleSidebar}
-						>
-							<ListItemIcon
-								sx={{
-									minWidth: 0,
-									mr: 'auto',
-									justifyContent: 'center',
-								}}
-							>
-								<SettingsIcon/>
-
-							</ListItemIcon>
-						</ListItemButton>
-					</ListItem>
-					
+					{
+						settings_items.map((item) => {
+							return (
+								<Sidebar_Item
+									key={item.name}
+									data={item}
+									expand={expand}
+								/>
+							)	
+						})
+					}
 				</List>
+
 			</Drawer>
-
-			<UIBody/>
-
+			
+			{props.children}
+			
 		</Box>
 	);
 }
