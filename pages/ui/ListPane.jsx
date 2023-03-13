@@ -6,7 +6,9 @@ import { UPDATE_HIGHLIGHTED_SPELL, UPDATE_CONTEXT_TOGGLE } from './../../actions
 
 const ListPane = () => {
     // Obtain list of spells from redux state.
-    const spell_list = useSelector(state => state.data.spells);
+    // const spell_list = useSelector(state => state.data.spells);
+    const spell_list = [];
+
     const context_toggle = useSelector(state => state.app.settings.context_toggle);
 
     // Define the columns to be displayed by the spell table 
@@ -30,7 +32,7 @@ const ListPane = () => {
 
     return (
         <Flex_Card
-            width="75"
+            width="100"
             height="90"
         >
             <DataGrid

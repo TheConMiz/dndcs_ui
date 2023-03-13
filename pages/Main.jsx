@@ -6,16 +6,16 @@ import {
 // Self-generated UI components
 import UIController from "./middleware/UIController";
 import DataController from "./middleware/DataController";
-import UIShell from './ui/UIShell';
+import UIThemeShell from './ui/UIThemeShell';
 //! App Structure - Data Sources -> Middleware <-> UI
 const Main = () => {
     return (
         <Fragment>
             {/* Middleware */}
-            <UIController />
+            {/* <UIController /> */}
             <DataController />
             {/* UI */}
-            <UIShell />
+            <UIThemeShell />
         </Fragment>
     )
 }

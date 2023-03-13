@@ -4,6 +4,8 @@ const initalState = {
             settings_toggle: false,
             context_toggle: false,
             dark_mode: false,
+            sidebar_expand: false,
+            drawer_width: 200,
         },
         highlighted_spell: "",
         endpoints: {

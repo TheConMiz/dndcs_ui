@@ -2,7 +2,7 @@ import React from 'react'
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import { Tooltip } from '@mui/material';
+import { ListItemText, Tooltip, Typography } from '@mui/material';
 
 
 const Sidebar_Item = (props) => {
@@ -30,6 +30,10 @@ const Sidebar_Item = (props) => {
 						{props.data.icon}
 
 					</ListItemIcon>
+
+					{/* <ListItemText
+						primary={props.data.name}
+					/> */}
 				</ListItemButton>
 			</Tooltip>
 		</ListItem>

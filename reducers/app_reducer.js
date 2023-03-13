@@ -1,6 +1,7 @@
 import {
     UPDATE_HIGHLIGHTED_SPELL,
     UPDATE_CONTEXT_TOGGLE,
+    UPDATE_SIDEBAR_EXPAND
 } from './../actions/app_actions';
 
 export default function app_reducer(state = [], action) {
@@ -18,6 +19,13 @@ export default function app_reducer(state = [], action) {
                 })
             });
         
+        case UPDATE_SIDEBAR_EXPAND:
+            return Object.assign({}, state, {
+                settings: Object.assign({}, state.settings, {
+                    sidebar_expand: action.payload,
+                })
+            });
+                
         default:
             return state
     }

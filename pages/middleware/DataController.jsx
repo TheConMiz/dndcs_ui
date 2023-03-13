@@ -49,9 +49,6 @@ const DataController = () => {
                 console.log(spells)
                 dispatch({ type: UPDATE_SPELLS, payload: spells })
             })
-            // .then(() => {
-            //     // console.log("Done fetching.")           
-            // })
     }
     // Function for calling the DND5E API to obtain a list of spells or individual spell data.
     const fetch_spells = () => {
@@ -70,16 +67,17 @@ const DataController = () => {
             .then(data => {
                 data.results.map((item) => {
                     let new_item = { id: item.index, ...item }
+                    console.log(new_item)
                     modified_list.push(new_item);
                 })
             })
             .then(() => {
+                // console.log(modified_list)
                 fetch_detailed_spells(modified_list);
             })
             .catch((err) => {
                 set_error(err.message);
             })
-        
     }
 
     useEffect(() => {
