@@ -18,19 +18,28 @@ import HikingIcon from '@mui/icons-material/Hiking';
 import Sidebar_Item from './base/Sidebar_Item';
 import Sidebar_Logo_Item from './base/Sidebar_Logo_Item';
 import { useSelector, useDispatch } from 'react-redux';
-import { UPDATE_SIDEBAR_EXPAND } from './../../actions/app_actions';
+import { UPDATE_SIDEBAR_EXPAND, UPDATE_SETTINGS_TOGGLE } from './../../actions/app_actions';
 
 
 const Sidebar = () => {
 
 	const drawerWidth = useSelector(state => state.app.settings.drawer_width);
+	
 	const sidebar_expand = useSelector(state => state.app.settings.sidebar_expand);
+
+	const settings_toggle = useSelector(state => state.app.settings_toggle);
 
 	const dispatch = useDispatch();
 
 	const toggleSidebar = () => {
 		let new_toggle = !sidebar_expand
 		dispatch({ type: UPDATE_SIDEBAR_EXPAND, payload: new_toggle });
+	}
+
+	const toggleSettings = () => {
+		let new_toggle = !settings_toggle
+		dispatch({ type: UPDATE_SETTINGS_TOGGLE, payload: new_toggle });
+		console.log(new_toggle)
 	}
 
 	const openedMixin = (theme) => ({
@@ -116,21 +125,24 @@ const Sidebar = () => {
 			"tooltip": "Light Mode",
 			"icon": <LightModeIcon />,
 			"onHover": "",
-			"onClick": ""
+			"onClick": "",
+			"disabled": true
 		},
 		{
 			"name": "Settings",
 			"tooltip": "Settings",
 			"icon": <SettingsIcon />,
 			"onHover": "",
-			"onClick": ""
+			"onClick": toggleSettings,
+			"disabled": false
 		},
 		{
 			"name": "Expand",
 			"tooltip": "Expand",
 			"icon": sidebar_expand ? <ChevronLeftIcon /> : <ChevronRightIcon />,
 			"onHover": "",
-			"onClick": toggleSidebar
+			"onClick": toggleSidebar,
+			// "disabled": true
 		},
 	];
 
@@ -172,7 +184,7 @@ const Sidebar = () => {
 							<Sidebar_Item
 								key={item.name}
 								data={item}
-								expand={sidebar_expand}
+								disabled={item.disabled}
 							/>
 						)
 					})

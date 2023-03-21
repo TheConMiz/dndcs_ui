@@ -1,7 +1,10 @@
 import React from 'react'
 import { styled } from '@mui/material/styles';
 import { useSelector } from 'react-redux';
-import { Typography } from '@mui/material';
+import ListPane from "./ListPane"
+import MasterGrid from '../MasterGrid';
+import DiceWidget from '../DiceWidget';
+import { Grid } from '@mui/material';
 
 const MainBody = () => {
 
@@ -10,6 +13,7 @@ const MainBody = () => {
 
 	const MainBody = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
 		({ theme, open }) => ({
+			display: "flex",
 			flexGrow: 1,
 			padding: theme.spacing(3),
 			transition: theme.transitions.create('margin', {
@@ -24,16 +28,19 @@ const MainBody = () => {
 				}),
 				marginRight: 0,
 			}),
-			// width: `calc(100vw - ${drawerWidth}px)`
+			width: `calc(100vw - ${drawerWidth}px)`
 		}),
 	);
 
 	return (
 		<MainBody
-			open={!sidebar_expand}
+			open={true}
 		>
-			<Typography>daslkmmadklkmldaklmasdmkldaskmlas</Typography>
-			{/* <ListPane/> */}
+			<ListPane />
+
+			<DiceWidget/>
+
+			
 		</MainBody>
 	)
 }

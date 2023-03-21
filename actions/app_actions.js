@@ -1,7 +1,7 @@
 export const UPDATE_HIGHLIGHTED_SPELL = "UPDATE_HIGHLIGHTED_SPELL";
 export const UPDATE_CONTEXT_TOGGLE = "UPDATE_CONTEXT_TOGGLE";
 export const UPDATE_SIDEBAR_EXPAND = "UPDATE_SIDEBAR_EXPAND";
-
+export const UPDATE_SETTINGS_TOGGLE = "UPDATE_SETTINGS_TOGGLE";
 
 export function updateHighlightedSpell(newSpell) {
     return {
@@ -26,6 +26,15 @@ export function updateSidebarExpand(newSidebarExpand) {
         type: UPDATE_SIDEBAR_EXPAND,
         payload: {
             sidebar_expand: newSidebarExpand
+        }
+    }
+}
+
+export function updateSettingsToggle(newSettingsToggle) {
+    return {
+        type: UPDATE_SETTINGS_TOGGLE,
+        payload: {
+            settings_toggle: newSettingsToggle
         }
     }
 }

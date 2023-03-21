@@ -6,8 +6,8 @@ import { UPDATE_HIGHLIGHTED_SPELL, UPDATE_CONTEXT_TOGGLE } from './../../actions
 
 const ListPane = () => {
     // Obtain list of spells from redux state.
-    // const spell_list = useSelector(state => state.data.spells);
-    const spell_list = [];
+    const spell_list = useSelector(state => state.data.spells);
+    // const spell_list = [];
 
     const context_toggle = useSelector(state => state.app.settings.context_toggle);
 
@@ -17,7 +17,7 @@ const ListPane = () => {
         { field: 'name', headerName: 'Name', width: "200", sortable: true },
         { field: 'desc', headerName: 'Description', width: "600" },
         // { field: '', headerName: 'Save', width: "200" },
-        // { field: '', headerName: 'School', width: "200" },
+        { field: "school", headerName: 'School', width: "200" },
         { field: 'casting_time', headerName: 'Time', width: "120" },
         { field: 'range', headerName: 'Range', width: "75" },
         { field: 'components', headerName: 'Comp.', width: "75" },
@@ -32,11 +32,13 @@ const ListPane = () => {
 
     return (
         <Flex_Card
-            width="100"
-            height="90"
+            width="90"
+            height="80"
+            
         >
             <DataGrid
                 rows={spell_list}
+                getRowId={(row) => row.index}
                 rowHeight={40}
                 columns={columns}
                 pageSize={15}

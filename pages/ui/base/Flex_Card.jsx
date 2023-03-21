@@ -9,13 +9,17 @@ const Flex_Card = (props) => {
 		<Paper
 			elevation={1}
 			sx={{
+				display: "flex",
 				maxWidth: "95vw",
 				width: props.width.toString() + "vw",
 				height: props.height.toString() + "vh",
-				overflow: "scroll",
+				overflow: "",
 				flexShrink: 1,
 				whiteSpace: 'nowrap',
 				boxSizing: 'border-box',
+				alignItems: props.alignItems,
+				flexDirection: props.flexDirection,
+				justifyContent: props.justifyContent
 			}}
 		>
 			{props.children}

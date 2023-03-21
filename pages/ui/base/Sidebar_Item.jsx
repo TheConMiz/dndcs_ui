@@ -19,6 +19,7 @@ const Sidebar_Item = (props) => {
 						px: 2.5,
 					}}
 					onClick={props.data.onClick}
+					disabled={props.disabled}
 				>
 					<ListItemIcon
 						sx={{

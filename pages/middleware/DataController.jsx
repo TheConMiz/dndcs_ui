@@ -46,7 +46,7 @@ const DataController = () => {
                     let modded_result = { id: result._id, ...result }
                     return modded_result
                 });
-                console.log(spells)
+                // console.log(spells)
                 dispatch({ type: UPDATE_SPELLS, payload: spells })
             })
     }
@@ -66,9 +66,7 @@ const DataController = () => {
             //! Modify the spell to include an ID field, so that it can be used with the DataGrid.
             .then(data => {
                 data.results.map((item) => {
-                    let new_item = { id: item.index, ...item }
-                    console.log(new_item)
-                    modified_list.push(new_item);
+                    modified_list.push(item);
                 })
             })
             .then(() => {
