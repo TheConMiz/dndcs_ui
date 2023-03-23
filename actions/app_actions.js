@@ -2,6 +2,8 @@ export const UPDATE_HIGHLIGHTED_SPELL = "UPDATE_HIGHLIGHTED_SPELL";
 export const UPDATE_CONTEXT_TOGGLE = "UPDATE_CONTEXT_TOGGLE";
 export const UPDATE_SIDEBAR_EXPAND = "UPDATE_SIDEBAR_EXPAND";
 export const UPDATE_SETTINGS_TOGGLE = "UPDATE_SETTINGS_TOGGLE";
+export const UPDATE_DARK_MODE = "UPDATE_DARK_MODE";
+
 
 export function updateHighlightedSpell(newSpell) {
     return {
@@ -38,3 +40,13 @@ export function updateSettingsToggle(newSettingsToggle) {
         }
     }
 }
+
+export function updateDarkMode(newSettingsToggle) {
+    return {
+        type: UPDATE_DARK_MODE,
+        payload: {
+            dark_mode: newSettingsToggle
+        }
+    }
+}
+

@@ -39,7 +39,6 @@ const Sidebar = () => {
 	const toggleSettings = () => {
 		let new_toggle = !settings_toggle
 		dispatch({ type: UPDATE_SETTINGS_TOGGLE, payload: new_toggle });
-		console.log(new_toggle)
 	}
 
 	const openedMixin = (theme) => ({

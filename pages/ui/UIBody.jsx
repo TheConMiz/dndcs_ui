@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Sidebar from './Sidebar';
 import MainBody from './MainBody';
 import Full_Size_Dialog from './base/Full_Size_Dialog';
+import TopBar from "./TopBar"
 
 const UIBody = () => {
 	const sx_content = {
@@ -19,10 +20,9 @@ const UIBody = () => {
 			component="main"
 			sx={sx_content}
 		>
-			
+			<TopBar/>
 			<Sidebar />
 			<MainBody />
-			
 			<Full_Size_Dialog/>
 		</Box>
 	)

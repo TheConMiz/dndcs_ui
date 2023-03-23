@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import { Dialog, Slide, DialogTitle, DialogContent, DialogContentText, DialogActions, Button, ListItem, List, ListItemButton, Radio, ToggleButton, Switch, ListItemText } from '@mui/material'
 import { useSelector, useDispatch } from 'react-redux';
+import { UPDATE_DARK_MODE, UPDATE_SETTINGS_TOGGLE } from './../../../actions/app_actions';
 
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -8,19 +9,26 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 const Full_Size_Dialog = (props) => {
-	const open = props.open
+	const dispatch = useDispatch();
 	
-	const settings_toggle = useSelector(state => state.app.settings_toggle);
-
+	const settings_toggle = useSelector(state => state.app.settings.settings_toggle);
+	const dark_mode = useSelector(state => state.app.settings.dark_mode);
 
 	const toggleSettings = () => {
-		
+		let new_toggle = !settings_toggle
+		dispatch({ type: UPDATE_SETTINGS_TOGGLE, payload: new_toggle });
 	}
 	
+	const toggleDarkMode = () => {
+		let new_toggle = !dark_mode
+		dispatch({ type: UPDATE_DARK_MODE, payload: new_toggle });
+	}
+
 	return (
 		<Dialog
 			open={settings_toggle}
-			TransitionComponent={Transition}
+			// TransitionComponent={Transition}
+			onClose={toggleSettings}
 			keepMounted
 			// onClose={handleClose}
 			aria-describedby="alert-dialog-slide-description"
@@ -38,8 +46,8 @@ const Full_Size_Dialog = (props) => {
 						</ListItemText>
 
 						<Switch
-							
-							checked={false}
+							checked={dark_mode}
+							onChange={toggleDarkMode}
 						></Switch>
 						
 					</ListItem>
