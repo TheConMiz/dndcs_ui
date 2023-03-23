@@ -20,7 +20,7 @@ const UIBody = () => {
 			component="main"
 			sx={sx_content}
 		>
-			<TopBar/>
+			{/* <TopBar/> */}
 			<Sidebar />
 			<MainBody />
 			<Full_Size_Dialog/>
