@@ -1,6 +1,6 @@
 import { Button, Typography } from '@mui/material'
 import React, { Fragment, useState } from 'react'
-import Flex_Card from './ui/base/Flex_Card'
+import Flex_Card from './base/Flex_Card'
 
 const DiceWidget = () => {
 

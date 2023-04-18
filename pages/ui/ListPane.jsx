@@ -13,7 +13,7 @@ const ListPane = () => {
 
     // Define the columns to be displayed by the spell table 
     const columns = [
-        // { field: 'prepared', headerName: 'Prepared', width: 70 },
+        { field: 'prepared', headerName: 'Prepared', width: 70 },
         { field: 'name', headerName: 'Name', width: "200", sortable: true },
         { field: 'desc', headerName: 'Description', width: "600" },
         // { field: '', headerName: 'Save', width: "200" },
@@ -36,8 +36,12 @@ const ListPane = () => {
             height="80"
             
         >
+
             <DataGrid
                 rows={spell_list}
+                // onRowClick={(event) => {
+                //     console.log(event.value)
+                // }}
                 getRowId={(row) => row.index}
                 rowHeight={40}
                 columns={columns}

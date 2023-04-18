@@ -4,6 +4,7 @@ import Sidebar from './Sidebar';
 import MainBody from './MainBody';
 import Full_Size_Dialog from './base/Full_Size_Dialog';
 import TopBar from "./TopBar"
+import ContextWindow from "./ContextWindow"
 
 const UIBody = () => {
 	const sx_content = {
@@ -23,6 +24,7 @@ const UIBody = () => {
 			{/* <TopBar/> */}
 			<Sidebar />
 			<MainBody />
+			<ContextWindow/>
 			<Full_Size_Dialog/>
 		</Box>
 	)

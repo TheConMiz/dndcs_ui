@@ -74,34 +74,27 @@ const CustomizedDialogs = () => {
 			</BootstrapDialogTitle>
 			
 			<DialogContent dividers>
-				{
-					//TODO: filter out unnecessary keys.
-					Object.keys(highlighted_spell).filter((item)=>item !== !filtered_values.includes(item)).map((item) => {
-						return (
-							<Fragment
-								key={item}
-							>
-								<Typography
-									gutterBottom
-								>
-									<Box
-										sx={{fontWeight: "bold", textTransform: 'capitalize'}}
-									>
-										{item}
 
-									</Box>
-									<Box
-									>
-										{highlighted_spell[item].toString()}
-									</Box>
-								</Typography>
+				<Fragment
+					key={highlighted_spell.index}
+				>
+					<Typography
+						gutterBottom
+					>
+						<Box
+							sx={{fontWeight: "bold", textTransform: 'capitalize'}}
+						>
+							Description
+						</Box>
+						<Box
+						>
+							{highlighted_spell ? highlighted_spell.desc.toString(): ""}
+						</Box>
+					</Typography>
 
 
-							</Fragment>
-
-						);
-					})
-				}
+				</Fragment>
+				
 			</DialogContent>
 
 			<DialogActions>

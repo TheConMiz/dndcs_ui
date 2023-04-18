@@ -3,7 +3,7 @@ import { styled } from '@mui/material/styles';
 import { useSelector } from 'react-redux';
 import ListPane from "./ListPane"
 import MasterGrid from '../MasterGrid';
-import DiceWidget from '../DiceWidget';
+import DiceWidget from './DiceWidget';
 import { Grid } from '@mui/material';
 
 const MainBody = () => {
