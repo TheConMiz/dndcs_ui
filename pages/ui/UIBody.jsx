@@ -10,10 +10,10 @@ const UIBody = () => {
 	const sx_content = {
 		width: "100vw",
 		height: "100vh",
-		backgroundColor: 'primary.dark',
+		backgroundColor: 'primary.light',
         paddingTop: 2,
 		flexGrow: 1,
-		display: "flex"
+		display: "flex",
 	}
 
 	return (

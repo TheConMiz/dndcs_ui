@@ -51,9 +51,9 @@ const UIThemeShell = () => {
 
 
 	return (
-		<ThemeProvider theme={dark_mode ? base_theme_light : base_theme_dark}>
+		// <ThemeProvider theme={dark_mode ? base_theme_light : base_theme_dark}>
 			<UIBody/>
-		</ThemeProvider>
+		// </ThemeProvider>
 	)
 }
 

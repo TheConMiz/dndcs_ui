@@ -141,7 +141,7 @@ const Sidebar = () => {
 			"icon": sidebar_expand ? <ChevronLeftIcon /> : <ChevronRightIcon />,
 			"onHover": "",
 			"onClick": toggleSidebar,
-			// "disabled": true
+			"disabled": true
 		},
 	];
 

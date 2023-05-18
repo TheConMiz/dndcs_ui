@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import ListPane from "./ListPane"
 import MasterGrid from '../MasterGrid';
 import DiceWidget from './DiceWidget';
-import { Grid } from '@mui/material';
+import { Grid, Paper, Box } from '@mui/material';
 
 const MainBody = () => {
 
@@ -36,10 +36,38 @@ const MainBody = () => {
 		<MainBody
 			open={true}
 		>
-			<ListPane />
+			<Box
+				sx={{
+					display: 'flex',
+					flexWrap: 'wrap',
+					'& > :not(style)': {
+						m: 1,
+						width: '100px',
+						height: '100px',
+					},
+				}}
+			>
+				<Paper
+					variant="outlined"
+					elevation={6}
+				>
+					test
+				</Paper>
 
-			<DiceWidget/>
+				<Paper
+					variant="outlined"
+					elevation={4}
+				>
+					test
+				</Paper>
 
+				<Paper
+					variant="outlined"
+					elevation={2}
+				>
+					test
+				</Paper>
+			</Box>
 			
 		</MainBody>
 	)
